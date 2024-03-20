@@ -1,4 +1,4 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useCallback } from "react";
 
 const initState = null;
 
@@ -23,7 +23,7 @@ function currentUserReducer(user, action) {
 const useCurrentUser = () => {
   const [currentUser, dispatch] = useReducer(currentUserReducer, initState)
 
-  const login = (userName, password) => {
+  const login = useCallback((userName, password) => {
     if (
       typeof userName !== 'string'
       || typeof password !== 'string'
@@ -38,17 +38,17 @@ const useCurrentUser = () => {
       name: userName,
       password: password
     })
-  }
+  } ,[])
 
-  const logout = () => {
+  const logout =  useCallback(() => {
     dispatch({
       type: 'logout',
     })
-  }
+  }, [])
 
-  const isLogin = () => {
+  const isLogin =  useCallback(() => {
     return currentUser?.name && currentUser?.password
-  }
+  }, [currentUser])
 
   return {
     currentUser,

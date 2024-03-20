@@ -1,12 +1,12 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useCallback } from "react";
 
 export const HOME = 'Home';
-export const LOGIN = 'Login';
+export const ABOUT = 'About';
 export const LOGOUT = 'Logout';
 
 const initState = HOME;
 
-const pathSet = new Set([HOME, LOGIN, LOGOUT])
+const pathSet = new Set([HOME, ABOUT, LOGOUT])
 
 export const RouteContext = createContext('Home');
 
@@ -25,12 +25,12 @@ function routeReducer(path, action) {
 const useRoute = () => {
   const [currentPath, dispatch] = useReducer(routeReducer, initState);
 
-  const navigate = (path) => {
+  const navigate = useCallback((path) => {
     dispatch({
       type: 'navigate',
       path
     })
-  }
+  }, [])
 
   return {
     currentPath,

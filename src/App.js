@@ -1,10 +1,10 @@
 import Sidebar from './components/sidebar'
-import Content from './components/layout';
-import ProtectedPage from './features/ProtectedPage';
+import Content from './components/content';
+import About from './features/About/index.js';
 import Home from './features/Home';
 import LogoutPage from './features/Logout/index.js';
 import useCurrentUser, { UserContext } from './utils/hooks/useCurrentUser'
-import useRoute, { RouteContext, HOME, LOGIN, LOGOUT } from './utils/hooks/useRoute'
+import useRoute, { RouteContext, HOME, ABOUT, LOGOUT } from './utils/hooks/useRoute'
 import './App.css';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Sidebar />
           <Content>
             {path.currentPath === HOME && <Home />}
-            {path.currentPath === LOGIN && <ProtectedPage />}
+            {path.currentPath === ABOUT && <About />}
             {path.currentPath === LOGOUT && <LogoutPage />}
           </Content>
         </UserContext.Provider>

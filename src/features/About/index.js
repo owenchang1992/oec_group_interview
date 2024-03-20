@@ -1,9 +1,10 @@
 import { useState, useMemo, useContext } from 'react';
+import LoginPage from "../Login";
 import { UserContext } from '../../utils/hooks/useCurrentUser'
 
 function Login() {
   const [ displayType, setDisplayType ] = useState('');
-  const { currentUser } = useContext(UserContext)
+  const { currentUser, isLogin } = useContext(UserContext)
 
   const handleChange = (e) => {
     setDisplayType(e.target.value);
@@ -12,10 +13,12 @@ function Login() {
   const displayContent = useMemo(
     () => new Map([
       ['version', '123456'],
-      ['user_name_password', `名稱:${currentUser.name}, 密碼: ${currentUser.password}`]
+      ['user_name_password', `名稱:${currentUser?.name}, 密碼: ${currentUser?.password}`]
     ])
     , [currentUser]
  )
+
+ if (!isLogin()) return <LoginPage />
 
   return (
     <div>
