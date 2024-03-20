@@ -1,9 +1,8 @@
 import Sidebar from './components/sidebar'
-import Layout from './components/layout';
-import Logout from './features/Logout';
-import Login from './features/Login';
+import Content from './components/layout';
+import ProtectedPage from './features/ProtectedPage';
 import Home from './features/Home';
-import LogoutButton from './components/button/logout.js';
+import LogoutPage from './features/Logout/index.js';
 import useCurrentUser, { UserContext } from './utils/hooks/useCurrentUser'
 import useRoute, { RouteContext, HOME, LOGIN, LOGOUT } from './utils/hooks/useRoute'
 import './App.css';
@@ -17,11 +16,11 @@ function App() {
       <RouteContext.Provider value={path}>
         <UserContext.Provider value={user} >
           <Sidebar />
-          <Layout>
+          <Content>
             {path.currentPath === HOME && <Home />}
-            {path.currentPath === LOGIN && (user.isLogin() ? <Login /> : <Logout />)}
-            {path.currentPath === LOGOUT && <LogoutButton />}
-          </Layout>
+            {path.currentPath === LOGIN && <ProtectedPage />}
+            {path.currentPath === LOGOUT && <LogoutPage />}
+          </Content>
         </UserContext.Provider>
       </RouteContext.Provider>
     </main>

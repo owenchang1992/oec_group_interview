@@ -1,27 +1,22 @@
+import Button from '../../components/button/index.js'
 import { useContext } from 'react';
-import { UserContext } from '../../utils/hooks/useCurrentUser'
+import { UserContext } from '../../utils/hooks/useCurrentUser/index.js'
+import { RouteContext, HOME } from '../../utils/hooks/useRoute/index.js'
 
-function Logout() {
-  const { login } = useContext(UserContext)
+const LogoutPage = () => {
+  const { logout } = useContext(UserContext);
+  const { navigate } = useContext(RouteContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    login(document['login']['name'].value, document['login']['password'].value)
+  const handleLogout = () => {
+    logout();
+    navigate(HOME);
   }
 
   return (
-    <form name="login" onSubmit={handleSubmit}>
-      <div className="form-item">
-        <label htmlFor="name">名稱:</label>
-        <input type="text" id="name" name="name" />
-      </div>
-      <div className="form-item">
-        <label htmlFor="password">密碼:</label>
-        <input type="password" id="password" name="password" />
-      </div>
-      <input type="submit" value="登入"/>
-    </form>
-  );
+    <Button onClick={handleLogout}>
+      登出
+    </Button>
+  )
 }
 
-export default Logout;
+export default LogoutPage;

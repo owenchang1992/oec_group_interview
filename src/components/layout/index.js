@@ -1,11 +1,11 @@
-import './layout.css';
+import './content.css';
 
-function Layout({ children }) {
+function Content({ children }) {
   return (
-    <div className="layout">
+    <div className="content">
       {children}
     </div>
   );
 }
 
-export default Layout;
+export default Content;
